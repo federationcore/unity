@@ -32,6 +32,7 @@ Core Language : Javascript
 Framework : Node.js
 Database : Mongo
 Security Protocol : HTTPS
+Blockchain : Etherium Fork, Proof of Stake
 
 Coding Principles:
 1) DRY
@@ -43,4 +44,11 @@ Coding Principles:
 7) Be kind to yourself and others.
 8) Mistakes happen, identify, take responsibility, fix and move on.
 
+Product Principles:
+1) Multilingual(Automated)
+2) Accessable
+3) Responsive
+4) Interactive
+5) Realtime
+6) Communication Stream Agnostic
 
