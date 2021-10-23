@@ -51,4 +51,3 @@ Product Principles:
 4) Interactive
 5) Realtime
 6) Communication Stream Agnostic
-
