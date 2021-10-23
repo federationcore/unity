@@ -1,9 +1,7 @@
-#   _     _      _  _____ ___  _
-#  / \ /\/ \  /|/ \/__ __\\  \//
-#  | | ||| |\ ||| |  / \   \  / 
-#  | \_/|| | \||| |  | |   / /  
-#  \____/\_/  \|\_/  \_/  /_/   
-#                           
+<p align="center">
+    <img alt="oss image" src="./imgs/unityclean.png" height="200px" width="200px">
+</p>
+
 
 # unity
 Core Unity Code Base
@@ -51,3 +49,23 @@ Product Principles:
 4) Interactive
 5) Realtime
 6) Communication Stream Agnostic
+
+
+
+
+
+
+
+
+
+
+
+
+
+#   _     _      _  _____ ___  _
+#  / \ /\/ \  /|/ \/__ __\\  \//
+#  | | ||| |\ ||| |  / \   \  / 
+#  | \_/|| | \||| |  | |   / /  
+#  \____/\_/  \|\_/  \_/  /_/   
+#                           
+
