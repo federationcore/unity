@@ -66,7 +66,7 @@ A language is missing? Want to improve this cheat sheet? [Contributions are welc
 
 Coming Soon
 
-# Thanks to https://github.com/zenika-open-source/promote-open-source-project for insperation.
+## Thanks to https://github.com/zenika-open-source/promote-open-source-project for insperation.
 
 
 
@@ -84,9 +84,9 @@ Coming Soon
 
 
 
-#   _     _      _  _____ ___  _
-#  / \ /\/ \  /|/ \/__ __\\  \//
-#  | | ||| |\ ||| |  / \   \  / 
-#  | \_/|| | \||| |  | |   / /  
-#  \____/\_/  \|\_/  \_/  /_/   
-# 
+##   _     _      _  _____ ___  _
+##  / \ /\/ \  /|/ \/__ __\\  \//
+## | | ||| |\ ||| |  / \   \  / 
+##  | \_/|| | \||| |  | |   / /  
+##  \____/\_/  \|\_/  \_/  /_/   
+## 
