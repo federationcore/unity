@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="oss image" src="./imgs/zoss-logo.svg" height="200px">
+    <img alt="oss image" src="./imgs/unityclean.png" height="200px">
 </p>
                      
 
