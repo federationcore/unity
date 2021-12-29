@@ -1,0 +1,41 @@
+$border-radius: 10px;
+.container {
+  height: 100vh;
+  //   background-color: red;
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__inner_container {
+    height: 90vh;
+    width: 100%;
+    background-color: green;
+    border-radius: $border-radius;
+    display: flex;
+    //LOGIN
+    &__login_left_side {
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+
+      background-color: red;
+
+      display: flex;
+      justify-content: center;
+      flex: 1;
+
+      &__login {
+        width: 80%;
+        background-color: blueviolet;
+      }
+    }
+    // PICTURE
+    &__picture_right_side {
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+      flex: 1;
+      background-color: blue;
+    }
+  }
+}
