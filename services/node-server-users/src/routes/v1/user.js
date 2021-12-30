@@ -7,8 +7,27 @@ const path = require('path');
 // Load User model
 const User = require('../../models/user.model');
 router.use(express.json());
+const getToken = async (user, encrypted_password, password) => {
+  const isMatch = await bcrypt.compare(password, encrypted_password);
+  if (isMatch) {
+    const payload = {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+    };
 
-router.post('/register', (req, res) => {
+    // Sign token
+    const token = jwt.sign(payload, 'secret', {
+      expiresIn: 31556926, // 1 year in seconds
+    });
+
+    return token;
+  } else {
+    return { passwordincorrect: 'Password incorrect' };
+  }
+};
+
+router.post('/register', async (req, res) => {
   // Form validation
 
   //   const { errors, isValid } = validateRegisterInput(req.body);
@@ -18,30 +37,33 @@ router.post('/register', (req, res) => {
   //     return res.status(400).json(errors);
   //   }
 
-  User.findOne({ email: req.body.email }).then((user) => {
-    if (user) {
-      return res.status(400).json({ email: 'Email already exists' });
-    } else {
-      const newUser = new User({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-      });
+  const user = await User.findOne({ email: req.body.email });
+  if (user) {
+    return res.status(400).json({ email: 'Email already exists' });
+  } else {
+    const newUser = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    });
 
-      // Hash password before saving in database
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
+    // Hash password before saving in database
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(newUser.password, salt, async (err, hash) => {
+        if (err) throw err;
+        newUser.password = hash;
+
+        try {
+          const user = await newUser.save();
+          const token = await getToken(user, user.password, req.body.password);
+
+          return res.status(200).json({ user: user, token: token });
+        } catch (err) {
           console.log(err);
-          if (err) throw err;
-          newUser.password = hash;
-          newUser
-            .save()
-            .then((user) => res.json(user))
-            .catch((err) => console.log(err));
-        });
+        }
       });
-    }
-  });
+    });
+  }
 });
 
 router.get(

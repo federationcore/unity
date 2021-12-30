@@ -10,11 +10,14 @@ import earth from './m.jpg';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../redux/user/user.action';
 const validationSchema = Yup.object().shape({
   email: Yup.string().required('Email is required'),
   password: Yup.string().required('Password is required'),
 });
 export const Login = () => {
+  const dispatch = useDispatch();
   let navigate = useNavigate();
 
   const formOptions = { resolver: yupResolver(validationSchema) };
@@ -27,18 +30,9 @@ export const Login = () => {
     formState: { errors },
   } = useForm(formOptions);
 
-  function onSubmit({ email, password }) {
-    console.log(email, password);
-    // axios
-    //   .post('/v1/user/register', {
-    //     name,
-    //     email,
-    //     password,
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   });
-  }
+  const onSubmit = (values) => {
+    dispatch(signIn(values));
+  };
   // const login = () => {
   //   axios
   //     .post('/v1/user/login', {
