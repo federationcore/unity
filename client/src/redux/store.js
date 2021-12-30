@@ -5,11 +5,16 @@ import thunk from 'redux-thunk';
 import { logger } from 'redux-logger';
 
 const composeEnhancers =
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose;
+  process.env.NODE_ENV !== 'production'
+    ? typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+      : compose
+    : compose || null;
 
-const middlewareList = [thunk, logger];
+const middlewareList = [thunk];
+if (process.env.NODE_ENV !== 'production') {
+  middlewareList.push(logger);
+}
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewareList));
 

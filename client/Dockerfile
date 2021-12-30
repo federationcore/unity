@@ -17,7 +17,9 @@ COPY package-lock.json .
 #  uses package. json only to validate that there are
 #  no mismatched versions. If any dependencies are 
 #  missing or have incompatible versions, it will throw an error.
-RUN npm ci
+RUN npm ci 
+
+
 # RUN npm install react-scripts@5.0.0 prettier@2.1.1 eslint@7.13.0 -g --silent
 
 

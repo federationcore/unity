@@ -1,7 +1,7 @@
 import {
   SIGN_IN_INPROGRESS,
-  SIGN_IN_SUCCESS,
-  SIGN_IN_FAILURE,
+  // SIGN_IN_SUCCESS,
+  // SIGN_IN_FAILURE,
 } from './user.types';
 
 const initialState = {
