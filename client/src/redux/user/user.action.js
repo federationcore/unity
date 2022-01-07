@@ -2,26 +2,24 @@ import {
   //SIGN IN
   SIGN_IN_SUCCESS,
   SIGN_IN_INPROGRESS,
-  SIGN_IN_FAILURE,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
   SIGN_UP_INPROGRESS,
   SIGN_OUT_SUCCESS,
-  //SIGN UP
-  // SIGN_UP_INPROGRESS,
-  // SIGN_UP_SUCCESS,
-  // SIGN_OUT_FAILURE,
 } from './user.types';
-import { postSignIn, postSignUp } from '../api/user';
+// import { postSignIn, postSignUp } from '../api/user';
 
 export const signIn = (values) => async (dispatch) => {
   dispatch({
     type: SIGN_IN_INPROGRESS,
   });
   try {
-    const { data } = await postSignIn(values);
+    // const { data } = await postSignIn(values);
 
-    dispatch({ type: SIGN_IN_SUCCESS, payload: data });
+    dispatch({
+      type: SIGN_IN_SUCCESS,
+      payload: { user: 'Ben', token: 'something' },
+    });
   } catch (err) {
     dispatch({ type: SIGN_UP_FAILURE, err: err.response });
   }
@@ -32,9 +30,12 @@ export const signUp = (values) => async (dispatch) => {
     type: SIGN_UP_INPROGRESS,
   });
   try {
-    const { data } = await postSignUp(values);
+    // const { data } = await postSignUp(values);
 
-    dispatch({ type: SIGN_UP_SUCCESS, payload: data });
+    dispatch({
+      type: SIGN_UP_SUCCESS,
+      payload: { user: 'ben', token: 'someting' },
+    });
   } catch (err) {
     dispatch({ type: SIGN_UP_FAILURE, err: err.response });
   }

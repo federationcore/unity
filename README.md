@@ -74,3 +74,5 @@ Thanks to https://github.com/zenika-open-source/promote-open-source-project for 
 <!--\ \_/ / | | | | |_| |_| |-->
 <!-- \___/|_| |_|_|\__|\__, |-->
 <!--                   |___/ -->
+
+docker-compose -f docker-compose.prod.yml up --build

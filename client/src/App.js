@@ -17,7 +17,7 @@ const App = () => {
     if (token) {
       navigate('/federation');
     }
-  }, [token]);
+  }, [token, navigate]);
   return (
     <>
       <Routes>
@@ -27,7 +27,7 @@ const App = () => {
             path="/federation"
             element={
               <div>
-                Under construction 😉
+                We are launching our data platform soon stand by
                 <Button
                   onClick={() => {
                     dispatch(signOut());

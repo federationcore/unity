@@ -5,7 +5,8 @@ const Input = ({ register, label = false, name, errors, ...rest }) => {
     <div className={styles.root}>
       {label ? <label className={styles.controlLabel}>{label}*</label> : null}
       <input
-        type={name === 'password' ? name : 'text'}
+        autoComplete={name}
+        type={name}
         placeholder={name}
         {...rest}
         {...(register ? { ...register(name) } : {})}

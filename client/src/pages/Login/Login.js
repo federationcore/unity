@@ -61,7 +61,10 @@ export const Login = () => {
               <img src={logo} alt="logo" />
             </div>
             <h1>Login</h1>
-            <p>We are saving the world believe us!</p>
+            <p>
+              The Federation is the intersect of social technological <br />
+              and environmental progress for mankind
+            </p>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Input
                 register={register}

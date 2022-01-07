@@ -60,7 +60,12 @@ $border-radius: 10px;
           font-weight: 800;
         }
         p {
+          text-align: left;
           color: gray;
+          @include respond(tab-land) {
+            text-align: center;
+          }
+
           span {
             font-family: 800;
             color: rgb(255, 0, 34);
@@ -68,10 +73,9 @@ $border-radius: 10px;
           }
         }
         &__logo_container {
-          // background-color: gray;
           display: flex;
           align-items: center;
-          // height: 110px;
+
           @include respond(tab-land) {
             justify-content: center;
             align-items: center;
@@ -80,7 +84,6 @@ $border-radius: 10px;
           }
 
           img {
-            // background-color: red;
             object-fit: contain;
             height: 100px;
             width: 110px;

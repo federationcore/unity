@@ -24,8 +24,7 @@ export const SignUp = () => {
   const [loading, setLoading] = useState(false);
 
   const formOptions = { resolver: yupResolver(validationSchema) };
-  // const [state, setstate] = useState(null);
-  // get functions to build form with useForm() hook
+
   const {
     register,
     handleSubmit,
@@ -37,27 +36,7 @@ export const SignUp = () => {
     setLoading(true);
     dispatch(signUp(values));
     setLoading(false);
-
-    // axios
-    //   .post('/v1/user/register', {
-    //     name,
-    //     email,
-    //     password,
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   });
   };
-  // const login = () => {
-  //   axios
-  //     .post('/v1/user/login', {
-  //       email: 'name@name.com',
-  //       password: 'test123',
-  //     })
-  //     .then((res) => {
-  //       setstate(res.data.token);
-  //     });
-  // };
 
   return (
     <div className={styles.container}>
@@ -76,7 +55,11 @@ export const SignUp = () => {
               <img src={logo} alt="logo" />
             </div>
             <h1>Sign Up</h1>
-            <p>We are saving the world believe us!</p>
+            <p>
+              {' '}
+              The Federation is the intersect of social technological
+              <br /> and environmental progress for mankind
+            </p>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Input
                 register={register}
@@ -84,6 +67,7 @@ export const SignUp = () => {
                 label={'Name'}
                 errors={errors.name?.message}
               />
+
               <Input
                 register={register}
                 name={'email'}
@@ -96,7 +80,6 @@ export const SignUp = () => {
                 label={'Password'}
                 errors={errors.password?.message}
               />
-
               <Button type={'submit'} isLoading={loading}>
                 Submit
               </Button>
