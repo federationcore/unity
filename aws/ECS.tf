@@ -5,10 +5,10 @@ module "ecs_cluster" {
 
   region     = "us-west-1"
   vpc_id     = aws_default_vpc.default.id
-  subnet_ids = [aws_default_subnet.default_us-west-1a.id, aws_default_subnet.default_us-west-1b.id]
+  subnet_ids = [aws_default_subnet.default_us-west-1a.id, aws_default_subnet.default_us-west-1c.id]
 
-  component             = "micro"
-  deployment_identifier = "react-nginx"
+  component             = "Federation"
+  deployment_identifier = "Staging"
 
   cluster_name                         = "cluster"
   //ssh-keygen -t rsa -b 4096 -C integration-test@example.com -N '' -f config/secrets/keys/bastion/ssh
@@ -24,9 +24,9 @@ module "ecs_cluster" {
 
 
 
-#TASK DEFINITION FOR USERS FOR DEFINING THE SPECS OF AN EC2 INSTANCE 
-resource "aws_ecs_task_definition" "users-td" {
-  family = "${var.my-project-name}-users-td"
+# #TASK DEFINITION FOR server FOR DEFINING THE SPECS OF AN EC2 INSTANCE 
+resource "aws_ecs_task_definition" "server-td" {
+  family = "${var.my-project-name}-server-td"
 
   container_definitions = <<DEFINITION
 [
@@ -47,10 +47,10 @@ resource "aws_ecs_task_definition" "users-td" {
 
 
     "essential": true,
-    "image": "${var.docker-username}/${var.my-project-name}-server:staging",
+    "image": "${var.ecr}/federationcore-server:staging",
     "memory": null,
     "memoryReservation": 128,
-    "name": "users"
+    "name": "server"
   }
 ]
 DEFINITION
@@ -85,7 +85,7 @@ resource "aws_ecs_task_definition" "client-td" {
 
 
     "essential": true,
-    "image": "${var.docker-username}/${var.my-project-name}-client:staging",
+    "image": "${var.ecr}/federationcore-client:staging",
     "memory": null,
     "memoryReservation": 128,
     "name": "client"
@@ -97,17 +97,17 @@ DEFINITION
 
 
 # FOR USERS SERVICE
-resource "aws_ecs_service" "users-service" {
-  name            = "${var.my-project-name}-users-service"
-  cluster         = "${var.my-project-name}-cluster"
-  task_definition = aws_ecs_task_definition.users-td.arn
+resource "aws_ecs_service" "server-service" {
+  name            = "${var.my-project-name}-server-service"
+  cluster         = "Federation-Staging-cluster"
+  task_definition = aws_ecs_task_definition.server-td.arn
   desired_count   = 1
 
 
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.users.arn
-    container_name   = "users"
+    target_group_arn = aws_lb_target_group.server.arn
+    container_name   = "server"
     container_port   = 5000
   }
 
@@ -115,19 +115,19 @@ resource "aws_ecs_service" "users-service" {
 }
 
 
-# FOR CLIENT SERVICE
-resource "aws_ecs_service" "client-service" {
-  name            = "${var.my-project-name}-client-service"
-  cluster         = "${var.my-project-name}-cluster"
-  task_definition = aws_ecs_task_definition.client-td.arn
-  desired_count   = 1
+# # FOR CLIENT SERVICE
+ resource "aws_ecs_service" "client-service" {
+   name            = "${var.my-project-name}-client-service"
+   cluster         = "Federation-Staging-cluster"
+   task_definition = aws_ecs_task_definition.client-td.arn
+   desired_count   = 1
 
 
-  load_balancer {
-    target_group_arn = aws_lb_target_group.client.arn
-    container_name   = "client"
-    container_port   = 80
-  }
+   load_balancer {
+     target_group_arn = aws_lb_target_group.client.arn
+     container_name   = "client"
+     container_port   = 80
+   }
 
 
-}
+ }

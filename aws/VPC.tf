@@ -1,5 +1,5 @@
 resource "aws_security_group" "sg" {
-  name        = "${var.my-project-name}-sg"
+  name        = "${var.my-project-name}"
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_default_vpc.default.id
 
@@ -66,12 +66,12 @@ resource "aws_default_subnet" "default_us-west-1a" {
     Name = "Default subnet for us-west-1a"
   }
 }
-//DEFAULT SUBNET us-west-1B
-resource "aws_default_subnet" "default_us-west-1b" {
-  availability_zone = "us-west-1b"
+//DEFAULT SUBNET us-west-1c
+resource "aws_default_subnet" "default_us-west-1c" {
+  availability_zone = "us-west-1c"
 
   tags = {
-    Name = "Default subnet for us-west-1b"
+    Name = "Default subnet for us-west-1c"
   }
 }
 

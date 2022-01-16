@@ -4,32 +4,33 @@ resource "aws_lb" "alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.sg.id, aws_default_security_group.default.id]
-  subnets            = [aws_default_subnet.default_us-west-1a.id, aws_default_subnet.default_us-west-1b.id]
+  subnets            = [aws_default_subnet.default_us-west-1a.id, aws_default_subnet.default_us-west-1c.id]
 
   enable_deletion_protection = false
 }
 
-
-
 //CLIENT TARGET GROUP
 resource "aws_lb_target_group" "client" {
-  name     = "${var.my-project-name}-client-tg"
+  name     = "${var.my-project-name}-client"
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_default_vpc.default.id
 }
 
-//USER TARGET GROUP
-resource "aws_lb_target_group" "users" {
 
-  name     = "${var.my-project-name}-users-tg"
+//USER TARGET GROUP
+resource "aws_lb_target_group" "server" {
+
+  name     = "${var.my-project-name}-server"
   port     = 5000
   protocol = "HTTP"
   vpc_id   = aws_default_vpc.default.id
   health_check {
-    path = "/api/users"
+    path = "/v1"
   }
 }
+
+
 //HTTP
 resource "aws_lb_listener" "listener_http" {
   load_balancer_arn = aws_lb.alb.arn
@@ -51,12 +52,12 @@ resource "aws_lb_listener_rule" "static" {
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.users.arn
+    target_group_arn = aws_lb_target_group.server.arn
   }
 
   condition {
     path_pattern {
-      values = ["/api/users", "/api/task"]
+      values = ["/v1/*"]
     }
   }
 
@@ -88,12 +89,12 @@ resource "aws_lb_listener_rule" "static" {
 
 #   action {
 #     type             = "forward"
-#     target_group_arn = aws_lb_target_group.users.arn
+#     target_group_arn = aws_lb_target_group.server.arn
 #   }
 
 #   condition {
 #     path_pattern {
-#       values = ["/api/users", "/api/task"]
+#       values = ["/v1/*"]
 #     }
 #   }
 

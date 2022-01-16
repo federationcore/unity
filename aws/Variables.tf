@@ -9,15 +9,7 @@ variable "aws-region" {
   type = string
 }
 
-# variable "mysql-root-password" {
-#   type = string
-# }
-
-# variable "mysql-user" {
-#   type = string
-# }
-
-variable "docker-username" {
+variable "ecr" {
   type = string
 }
 variable "my-project-name"{

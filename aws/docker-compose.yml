@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  terraform:
+    platform: linux/amd64
+    image: hashicorp/terraform:0.12.21
+    volumes:
+      - .:/infra
+    working_dir: /infra
